@@ -24,3 +24,10 @@
 
 - Installed `pnpm add -D typeorm pg` to install TypeORM and PostgreSQL driver.
 - Added the TypeOrm configuration in `ormconfig.ts` file.
+
+
+## 3. Create Tag Entity.
+- (Entity)[https://typeorm.io/entities#what-is-entity] is a class that maps to a database table. It defines the structure of the table and the relationships between tables.
+- Created a new file `tag.entity.ts` in the `src/entities` folder.
+- Added `id` as primary key and `tagName` as a string in the tag entity.
+- `\dt tag` : List all tables in the current database with descriptions.

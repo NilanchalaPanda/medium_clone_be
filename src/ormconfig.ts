@@ -8,7 +8,7 @@ const config: DataSourceOptions = {
   username: 'postgres',
   password: 'Nil@_2003',
   database: 'mediumclone',
-  entities: [],
+  entities: [__dirname + '/**/*.entity{.ts,.js}'],
   // !Disable logging in production
   synchronize: true,
 };
