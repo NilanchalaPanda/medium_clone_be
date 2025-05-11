@@ -1,7 +1,7 @@
-import { DataSourceOptions } from 'typeorm';
+import { DataSource, DataSourceOptions } from 'typeorm';
 
 // This is a TypeScript file that exports a configuration object for TypeORM.
-const config: DataSourceOptions = {
+export const config: DataSourceOptions = {
   type: 'postgres',
   host: 'localhost',
   port: 5432,
@@ -9,8 +9,9 @@ const config: DataSourceOptions = {
   password: 'Nil@_2003',
   database: 'mediumclone',
   entities: [__dirname + '/**/*.entity{.ts,.js}'],
-  // !Disable logging in production
-  synchronize: true,
+  synchronize: false,
+
+  migrations: [__dirname + '/migrations/**/*{.ts,.js}'],
 };
 
-export default config;
+export const dataSource = new DataSource(config);

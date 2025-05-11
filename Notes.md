@@ -42,5 +42,15 @@
 - `forFeature()` is used to register the repository in the module.
 - Inject the TagRepository in the constructor of the TagService (important).
 
-- Once data is retrieved from the db, modify it in the **controller** and send it to the client as per the API Specs/Requirements. NOT IN THE SERVICE, because it can reused
-  in other places as well.
+- Once data is retrieved from the db, modify it in the **controller** and send it to the client as per the API Specs/Requirements. NOT IN THE SERVICE, because it can reused in other places as well.
+
+## 5. Setting up the migrations.
+
+- added `db:drop` script to `package.json` to drop the database.
+    - run `pnpm db:drop` to drop the database.
+- added `db:create` script to `package.json` to run the migrations.
+    - run `pnpm db:create` to create the migrations.
+- added `db:migrate` script to `package.json` to run the migrations.
+    - run `pnpm db:migrate` to run the migrations and feed the db.
+
+- `up` runs when we run the migration & `down` runs when we rollback the migration.
