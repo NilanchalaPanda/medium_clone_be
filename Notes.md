@@ -31,3 +31,16 @@
 - Created a new file `tag.entity.ts` in the `src/entities` folder.
 - Added `id` as primary key and `tagName` as a string in the tag entity.
 - `\dt tag` : List all tables in the current database with descriptions.
+
+## 4. Create Tag Repository.
+
+- Populate some data:
+    - Add some data to db - `INSERT INTO tag (name) VALUES ['tag1'];`
+
+- (Repository)[https://typeorm.io/repositories] is a class that provides methods to interact with the database. It allows us to perform CRUD operations on the database.
+- (Repository Pattern)[https://docs.nestjs.com/recipes/sql-typeorm#repository-pattern] : It is used to get the data from out database and map it to our entity.
+- `forFeature()` is used to register the repository in the module.
+- Inject the TagRepository in the constructor of the TagService (important).
+
+- Once data is retrieved from the db, modify it in the **controller** and send it to the client as per the API Specs/Requirements. NOT IN THE SERVICE, because it can reused
+  in other places as well.

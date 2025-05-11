@@ -7,5 +7,5 @@ export class Tag {
   id: number;
 
   @Column()
-  tagName: string;
+  name: string;
 }
