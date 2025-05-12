@@ -79,3 +79,6 @@
 - Create a new migration file for the user entity => `pnpm db:create src/migrations/CreateUser`
 - Push it to the db => `pnpm db:migrate`
 
+- **Note:**
+  - `user` is a reserved keyword in PostgreSQL, so we need to use double quotes to escape it. So, the table name was renamed as `users` instead of `user`.
+  - Rolled back the previous the migration and create new ones to create the user table, then checked the db. Data was created successfully.
