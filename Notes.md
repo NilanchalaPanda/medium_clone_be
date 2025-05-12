@@ -72,3 +72,10 @@
 - [Docs](https://docs.nestjs.com/controllers#request-payloads) : DTO (Data Transfer Object) is an object that carries data between processes. It is used to **validate the data before sending** it to the database.
 - Read more about request objects in Nest.js [Docs](https://docs.nestjs.com/controllers#request-objects).
 - Cmd for dto: `nest g class user/dto/create-user.dto.ts`
+
+## 8. Create User Entity
+
+- Create as per the API Specificatins.
+- Create a new migration file for the user entity => `pnpm db:create src/migrations/CreateUser`
+- Push it to the db => `pnpm db:migrate`
+
