@@ -1,9 +1,11 @@
 /* eslint-disable @typescript-eslint/no-require-imports */
-// We need to run module alias only in production mode.
-if (!process.env.IS_TS_NODE) {
-  require('module-alias/register');
-}
+// !Have to fix the IS_TS_NODE custom script issue located in the nodemon.json file. 
+// if (!process.env.IS_TS_NODE) {
+// require('module-alias/register');
+// }
 
+//! This should only be used in production mode.
+require('module-alias/register');
 
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
