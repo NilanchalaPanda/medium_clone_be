@@ -94,3 +94,6 @@
 - add `class-validator` and `class-transformer` packages to validate the data.
 - use `@UsePipes(new ValidationPipe())` decorator to use the pipe in the controller with IsNotEmpty and IsEmail decorators to validate the data in registerDto.
 - add validations in service level to check if the `user.email` or `user.username` already exists in the db with Nestjs inbuilt `HttpException` and `HttpStatus` class.
+
+## Create Login Endpoint
+- specification: https://realworld-docs.netlify.app/specifications/backend/endpoints/#login
