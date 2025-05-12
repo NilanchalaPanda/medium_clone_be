@@ -89,4 +89,8 @@
 - create userResponseInterface for response type in user service and user.type to reject the hashPassword from the user object.
 
 ## Validation with Pipes
+
 - [Docs](https://docs.nestjs.com/pipes) : Pipes are used to either **VALIDATE or TRANSFORM** the data before sending it to the database.
+- add `class-validator` and `class-transformer` packages to validate the data.
+- use `@UsePipes(new ValidationPipe())` decorator to use the pipe in the controller with IsNotEmpty and IsEmail decorators to validate the data in registerDto.
+- add validations in service level to check if the `user.email` or `user.username` already exists in the db with Nestjs inbuilt `HttpException` and `HttpStatus` class.
