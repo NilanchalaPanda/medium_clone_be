@@ -12,14 +12,13 @@ export class Users {
   @Column()
   email: string;
 
-  @Column()
+  @Column({ select: false })
   password: string;
 
   @BeforeInsert()
   async hashPassword() {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
-    const newPassword: string = await hash(this.password, 10);
-    this.password = newPassword;
+    this.password = await hash(this.password, 10);
   }
 
   @Column({ default: '' })

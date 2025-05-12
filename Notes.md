@@ -82,3 +82,11 @@
 - **Note:**
   - `user` is a reserved keyword in PostgreSQL, so we need to use double quotes to escape it. So, the table name was renamed as `users` instead of `user`.
   - Rolled back the previous the migration and create new ones to create the user table, then checked the db. Data was created successfully.
+
+## 9. Fix the response format as per the API specifications
+
+- add JWT token to the response. Library used: `[jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken)` and `[bcrypt](https://www.npmjs.com/package/bcrypt)` for hashing the password.
+- create userResponseInterface for response type in user service and user.type to reject the hashPassword from the user object.
+
+## Validation with Pipes
+- [Docs](https://docs.nestjs.com/pipes) : Pipes are used to either **VALIDATE or TRANSFORM** the data before sending it to the database.
