@@ -37,10 +37,11 @@ export class UserService {
     return savedUser;
   }
 
-  async loginUser(loginUserDto: LoginUserDtoTs) {
+  async loginUser(loginUserDto: LoginUserDtoTs): Promise<Users> {
     console.log('Login User DTO - ', loginUserDto);
     const user = await this.userRepository.findOne({
       where: { email: loginUserDto.email },
+      select: ['id', 'username', 'email', 'image', 'bio', 'password'],
     });
 
     console.log('User - ', user);
@@ -59,6 +60,8 @@ export class UserService {
         HttpStatus.UNAUTHORIZED,
       );
     }
+
+    delete user.password;
 
     return user;
   }
