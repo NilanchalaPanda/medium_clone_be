@@ -88,12 +88,21 @@
 - add JWT token to the response. Library used: `[jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken)` and `[bcrypt](https://www.npmjs.com/package/bcrypt)` for hashing the password.
 - create userResponseInterface for response type in user service and user.type to reject the hashPassword from the user object.
 
-## Validation with Pipes
+## 10. Validation with Pipes
 
 - [Docs](https://docs.nestjs.com/pipes) : Pipes are used to either **VALIDATE or TRANSFORM** the data before sending it to the database.
 - add `class-validator` and `class-transformer` packages to validate the data.
 - use `@UsePipes(new ValidationPipe())` decorator to use the pipe in the controller with IsNotEmpty and IsEmail decorators to validate the data in registerDto.
 - add validations in service level to check if the `user.email` or `user.username` already exists in the db with Nestjs inbuilt `HttpException` and `HttpStatus` class.
 
-## Create Login Endpoint
+## 11. Create Login Endpoint
 - specification: https://realworld-docs.netlify.app/specifications/backend/endpoints/#login
+
+## 12. Auth Middleware and Get USER API.
+
+- Docs: [Nest.js Middleware](https://docs.nestjs.com/middleware)
+- Middleware is used to check if the user is authenticated or not.
+- Create a new middleware command - `nest g mi user/middlewares/auth`
+- Configuration of middleware in `app.module.ts` file is also imoprtant which acts as implements the Dependency Injection.
+- Created custom types for the user and auth middleware to use in the controller and service names as `ExpressRequest` extending the `Request` interface from `express`.
+- Used `verify` method from `jsonwebtoken` to verify the token and get the user id from the token. If token is valid, then get the user from the db and send it to the client.

@@ -66,6 +66,10 @@ export class UserService {
     return user;
   }
 
+  async findUserById(userId: number): Promise<Users | null> {
+    return await this.userRepository.findOne({ where: { id: userId } });
+  }
+
   generateJwtToken(user: Users): string {
     const payload = {
       id: user.id,
