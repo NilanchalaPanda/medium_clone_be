@@ -96,6 +96,7 @@
 - add validations in service level to check if the `user.email` or `user.username` already exists in the db with Nestjs inbuilt `HttpException` and `HttpStatus` class.
 
 ## 11. Create Login Endpoint
+
 - specification: https://realworld-docs.netlify.app/specifications/backend/endpoints/#login
 
 ## 12. Auth Middleware and Get USER API.
@@ -112,3 +113,18 @@
 - Decorators are used to extract the user from the request object and send it to the controller.
 - Create a custom decorator using the command `nest g d user/decorators/user`.
 - Use `customParameterDecorator` to create a custom decorator that extracts the user from the request object.
+
+## 14. AuthGaurd.
+
+- A guard is used to protect the routes and check if the user is authenticated or not.
+- A middleware can be used as a gaurd it is recommended to use a guard for authorization.
+- Create a new guard using the command `nest g g user/guards/auth`.
+- Process :
+
+  - Use the `nest g gu user/guards/auth` command to create a new guard.
+  - The user auth gaurd comes first before the middleware, so that it can check if the user is authenticated or not. After that, the middleware will be executed to get the user from the db.
+  - The **FLOW** is > User is requesting for a protected route > First we are checking if the user is present or not in the custom request object > If user is present, then we are checking if the user is authenticated > Then it moves towards the **AUTHGAURD**, here it checks if it got the user or not > If user is authenticated, then we are getting the user from the db and sending it to the client.
+  - If user is not authenticated, then it will throw an error with the status code 401 (UNAUTHORIZED).
+
+- **HOW TO USE IT?**
+  - The AuthGaurd is enabled in the `user.module` file where we have to add it in the `providers` array and use it in the controller with the `@UseGuards(AuthGuard)` decorator.
