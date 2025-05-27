@@ -7,6 +7,7 @@ import { sign } from 'jsonwebtoken';
 import { UserResponseInterface } from './types/userResponse.interface';
 import { LoginUserDtoTs } from './dto/login-user.dto';
 import { compare } from 'bcrypt';
+import { UpdateUserDtoTs } from './dto/update-user.dto';
 
 @Injectable()
 export class UserService {
@@ -68,6 +69,19 @@ export class UserService {
 
   async findUserById(userId: number): Promise<Users | null> {
     return await this.userRepository.findOne({ where: { id: userId } });
+  }
+
+  async updateUser(
+    userId: number,
+    updateUserDto: UpdateUserDtoTs,
+  ): Promise<Users> {
+    const user = await this.userRepository.findOne({ where: { id: userId } });
+    if (!user) {
+      throw new HttpException('User not found', HttpStatus.NOT_FOUND);
+    }
+    Object.assign(user, updateUserDto);
+    const updatedUser = await this.userRepository.save(user);
+    return updatedUser;
   }
 
   generateJwtToken(user: Users): string {

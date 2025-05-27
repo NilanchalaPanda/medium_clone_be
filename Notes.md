@@ -128,3 +128,16 @@
 
 - **HOW TO USE IT?**
   - The AuthGaurd is enabled in the `user.module` file where we have to add it in the `providers` array and use it in the controller with the `@UseGuards(AuthGuard)` decorator.
+
+## 15. Update user profile.
+
+- specification: https://realworld-docs.netlify.app/specifications/backend/endpoints/#update-user
+- The steps include:
+  - Create a new DTO for update user profile with the name `update-user.dto.ts` in the `user/dto` folder.
+    - **About DTO >** This is the payload representation, i.e. this will be passed in the request body.
+  - Create a new endpoint in the user controller with **PUT** request to update the user profile.
+    - **PUT >** It updates the **whole** user object.
+  - Use the auth guard to protect the route.
+  - Use the validation pipe to validate the data in the request body (At this point the DTO will be used).
+  - Use the `@Body()` decorator to get the data from the request body.
+  - Use the `@Put()` decorator to update the user profile.

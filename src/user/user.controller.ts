@@ -4,6 +4,7 @@ import {
   Controller,
   Get,
   Post,
+  Put,
   UseGuards,
   UsePipes,
   ValidationPipe,
@@ -14,6 +15,7 @@ import { UserResponseInterface } from '@app/user/types/userResponse.interface';
 import { LoginUserDtoTs } from '@app/user/dto/login-user.dto';
 import { User } from '@app/user/decorators/user/user.decorator';
 import { AuthGuard } from '@app/user/guards/auth/auth.guard';
+import { UpdateUserDtoTs } from './dto/update-user.dto';
 
 @Controller()
 export class UserController {
@@ -41,6 +43,21 @@ export class UserController {
   @UseGuards(AuthGuard)
   // eslint-disable-next-line @typescript-eslint/require-await
   async currentUser(@User() user: any): Promise<UserResponseInterface> {
+    return this.userService.buildUserResponse(user);
+  }
+
+  @Put('user')
+  @UseGuards(AuthGuard)
+  @UsePipes(ValidationPipe)
+  async updateUser(
+    @User('id') currentUserId: number,
+    @Body('user') updateUserDto: UpdateUserDtoTs,
+  ): Promise<UserResponseInterface> {
+    const user = await this.userService.updateUser(
+      currentUserId,
+      updateUserDto,
+    );
+
     return this.userService.buildUserResponse(user);
   }
 }
