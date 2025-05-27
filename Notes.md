@@ -106,3 +106,9 @@
 - Configuration of middleware in `app.module.ts` file is also imoprtant which acts as implements the Dependency Injection.
 - Created custom types for the user and auth middleware to use in the controller and service names as `ExpressRequest` extending the `Request` interface from `express`.
 - Used `verify` method from `jsonwebtoken` to verify the token and get the user id from the token. If token is valid, then get the user from the db and send it to the client.
+
+## 13. User decorator.
+
+- Decorators are used to extract the user from the request object and send it to the controller.
+- Create a custom decorator using the command `nest g d user/decorators/user`.
+- Use `customParameterDecorator` to create a custom decorator that extracts the user from the request object.
