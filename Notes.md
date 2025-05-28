@@ -189,4 +189,9 @@
 
 - The API spec is: https://realworld-docs.netlify.app/specifications/backend/endpoints/#update-article
 - The endpoint is still dynamic > **DELETE /api/articles/:slug**
-- 
+
+
+## 22. Getting all articles.
+
+- The API spec is: https://realworld-docs.netlify.app/specifications/backend/api-response-format/#multiple-articles
+- The response type is updated with a new interface called `multipleArticleResponseInterface` which is an object list of articles with key as articles and articlesCount.

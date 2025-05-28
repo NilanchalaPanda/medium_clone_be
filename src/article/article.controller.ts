@@ -17,6 +17,7 @@ import { CreateArticleDtoTs } from '@app/article/dto/create-article.dto';
 import { Users } from '@app/user/user.entity';
 import { ArticleResponseInterface } from './types/articleResponse.interface';
 import { UpdateArticleDtoTs } from './dto/update-article.dto';
+import { MultipleArticleResponseInterface } from './types/multipleArticleResponse.interface';
 
 @Controller('articles')
 export class ArticleController {
@@ -67,5 +68,11 @@ export class ArticleController {
     );
 
     return this.articleService.buildArticleResponse(article);
+  }
+
+  @Get()
+  async getAllArticles(): Promise<MultipleArticleResponseInterface> {
+    const articles = await this.articleService.getAllArticles();
+    return { articles, articlesCount: articles.length };
   }
 }

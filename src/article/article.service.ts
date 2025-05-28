@@ -91,6 +91,11 @@ export class ArticleService {
     return this.articleRepository.save(article);
   }
 
+  async getAllArticles() {
+    const articles = await this.articleRepository.find({});
+    return articles;
+  }
+
   buildArticleResponse(article: Article): ArticleResponseInterface {
     return { article };
   }
