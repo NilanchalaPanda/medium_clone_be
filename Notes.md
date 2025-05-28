@@ -141,3 +141,16 @@
   - Use the validation pipe to validate the data in the request body (At this point the DTO will be used).
   - Use the `@Body()` decorator to get the data from the request body.
   - Use the `@Put()` decorator to update the user profile.
+
+## 16. Create new Article.
+
+- specification: https://realworld-docs.netlify.app/specifications/backend/endpoints/#create-article
+- The Process of working with new endpoint alltogether:
+  - First task is to create a module, controller and service (_article_)
+  - Created ArticleEntity by properly examining the structure given in the specs.
+  - Now we will run our **migrations.**
+
+- The last part after intial setup
+  - Create a migration > `pnpm db:create src/migrations/{migrationName}`
+  - Check the migration file. Push the migration > `pnpm db:migrate`
+  - Check in the db > `psql -U postgres` > `\c mediumclone` > `\d article` -- Describe the table article.
