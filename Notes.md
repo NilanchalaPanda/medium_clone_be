@@ -181,3 +181,5 @@
 
 - The API spec is: https://realworld-docs.netlify.app/specifications/backend/endpoints/#delete-article
 - The endpoint is still dynamic here > **DELETE /api/articles/:slug**
+- `eager: true` fetches user data whenever article is being fetched.
+- All the logic is properly written in service and controller layer!
