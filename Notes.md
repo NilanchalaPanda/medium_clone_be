@@ -30,7 +30,7 @@
 
 ## 3. Create Tag Entity.
 
-- (Entity)[https://typeorm.io/entities#what-is-entity] is a class that maps to a database table. It defines the structure of the table and the relationships between tables.
+- [Entity](https://typeorm.io/entities#what-is-entity) is a class that maps to a database table. It defines the structure of the table and the relationships between tables.
 - Created a new file `tag.entity.ts` in the `src/entities` folder.
 - Added `id` as primary key and `tagName` as a string in the tag entity.
 - `\dt tag` : List all tables in the current database with descriptions.
@@ -41,8 +41,8 @@
 
   - Add some data to db - `INSERT INTO tag (name) VALUES ['tag1'];`
 
-- (Repository)[https://typeorm.io/repositories] is a class that provides methods to interact with the database. It allows us to perform CRUD operations on the database.
-- (Repository Pattern)[https://docs.nestjs.com/recipes/sql-typeorm#repository-pattern] : It is used to get the data from out database and map it to our entity.
+- [Repository](https://typeorm.io/repositories) is a class that provides methods to interact with the database. It allows us to perform CRUD operations on the database.
+- [Repository Pattern](https://docs.nestjs.com/recipes/sql-typeorm#repository-pattern) : It is used to get the data from out database and map it to our entity.
 - `forFeature()` is used to register the repository in the module.
 - Inject the TagRepository in the constructor of the TagService (important).
 
@@ -168,3 +168,12 @@
 - Handled the JwtExpireError in the `auth.middleware.ts` file within the catch block.
 - Formatted the Article response according to the specifications by creating an `ArticleResponseInterface` and updating the return types in both the `controller and service` files.
 - Used `slugify` package to update the slug, generated from the Title of the Article.
+
+## 19. Working with single GET of articles with SLUG.
+
+- The API spec is: https://realworld-docs.netlify.app/specifications/backend/endpoints/#get-article
+- The endpoint is dynamic in this case > **GET /api/articles/:slug**
+  - https://docs.nestjs.com/custom-decorators#param-decorators
+- Used the Param decorator to extract the `:slug` from the request url. Then passed it to the service layer.
+- From the service layer, if found; the article is returned.
+
