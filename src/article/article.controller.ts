@@ -5,6 +5,7 @@ import {
   Get,
   Param,
   Post,
+  Put,
   UseGuards,
   UsePipes,
   ValidationPipe,
@@ -15,6 +16,7 @@ import { User } from '@app/user/decorators/user/user.decorator';
 import { CreateArticleDtoTs } from '@app/article/dto/create-article.dto';
 import { Users } from '@app/user/user.entity';
 import { ArticleResponseInterface } from './types/articleResponse.interface';
+import { UpdateArticleDtoTs } from './dto/update-article.dto';
 
 @Controller('articles')
 export class ArticleController {
@@ -48,5 +50,22 @@ export class ArticleController {
   @UsePipes(ValidationPipe)
   async deleteArticle(@Param('slug') slug: string, @User('id') userId: number) {
     return await this.articleService.deleteArticleBySlug(slug, userId);
+  }
+
+  @Put(':slug')
+  @UseGuards(AuthGuard)
+  @UsePipes(ValidationPipe)
+  async updateArticle(
+    @Param('slug') slug: string,
+    @User('id') userId: number,
+    @Body('article') updatedArticleDto: UpdateArticleDtoTs,
+  ): Promise<ArticleResponseInterface> {
+    const article = await this.articleService.updateArticleBySlug(
+      slug,
+      userId,
+      updatedArticleDto,
+    );
+
+    return this.articleService.buildArticleResponse(article);
   }
 }

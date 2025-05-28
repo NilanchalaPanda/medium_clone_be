@@ -183,3 +183,10 @@
 - The endpoint is still dynamic here > **DELETE /api/articles/:slug**
 - `eager: true` fetches user data whenever article is being fetched.
 - All the logic is properly written in service and controller layer!
+
+
+## 21. Updating single article with SLUG.
+
+- The API spec is: https://realworld-docs.netlify.app/specifications/backend/endpoints/#update-article
+- The endpoint is still dynamic > **DELETE /api/articles/:slug**
+- 
