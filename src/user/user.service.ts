@@ -39,13 +39,10 @@ export class UserService {
   }
 
   async loginUser(loginUserDto: LoginUserDtoTs): Promise<Users> {
-    console.log('Login User DTO - ', loginUserDto);
     const user = await this.userRepository.findOne({
       where: { email: loginUserDto.email },
       select: ['id', 'username', 'email', 'image', 'bio', 'password'],
     });
-
-    console.log('User - ', user);
 
     if (!user) {
       throw new HttpException('User does not exist', HttpStatus.UNAUTHORIZED);
@@ -54,7 +51,6 @@ export class UserService {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
     const isPassword = await compare(loginUserDto.password, user.password);
 
-    console.log(loginUserDto.password, user.password, isPassword);
     if (!isPassword) {
       throw new HttpException(
         'Credentials are invalid',

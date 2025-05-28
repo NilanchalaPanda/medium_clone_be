@@ -162,3 +162,9 @@
 - Now, the DTO was created for the Article. It includes: `title, description, body, tagList?`
 - Use of dependency injection in the `article.serive.ts` file, to connect it with the module.
 - Added **AuthGaurd and ValidationPipe** in the `article.controller.ts` file before hiting the actual request.
+
+## 18. Format the Article Response and handle checks.
+
+- Handled the JwtExpireError in the `auth.middleware.ts` file within the catch block.
+- Formatted the Article response according to the specifications by creating an `ArticleResponseInterface` and updating the return types in both the `controller and service` files.
+- Used `slugify` package to update the slug, generated from the Title of the Article.
