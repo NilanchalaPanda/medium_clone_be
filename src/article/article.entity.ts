@@ -47,7 +47,8 @@ export class Article {
   }
 
   // Relations with Users:
-  @ManyToOne(() => Users, (user) => user.articles)
+  // "eager: true" - This fetches all the user data whenever an articles is fetched.
+  @ManyToOne(() => Users, (user) => user.articles, { eager: true })
   author: Users;
 }
 

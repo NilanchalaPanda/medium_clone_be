@@ -177,3 +177,7 @@
 - Used the Param decorator to extract the `:slug` from the request url. Then passed it to the service layer.
 - From the service layer, if found; the article is returned.
 
+## 20. Delete single article with SLUG.
+
+- The API spec is: https://realworld-docs.netlify.app/specifications/backend/endpoints/#delete-article
+- The endpoint is still dynamic here > **DELETE /api/articles/:slug**
