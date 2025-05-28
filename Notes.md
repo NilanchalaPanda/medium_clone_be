@@ -154,3 +154,5 @@
   - Create a migration > `pnpm db:create src/migrations/{migrationName}`
   - Check the migration file. Push the migration > `pnpm db:migrate`
   - Check in the db > `psql -U postgres` > `\c mediumclone` > `\d article` -- Describe the table article.
+
+## 17. 
