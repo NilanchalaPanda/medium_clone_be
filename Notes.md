@@ -10,6 +10,7 @@
 - `\c`: Connect to a database.
 - `\dt` : List all tables in the current database.
 - `\q` : Quit the psql shell.
+- `\x` : For expanded display of the data in the table.
 
 - **Commands I followed:**
   - Login `psql -U postgres`
@@ -142,10 +143,11 @@
   - Use the `@Body()` decorator to get the data from the request body.
   - Use the `@Put()` decorator to update the user profile.
 
-## 16. Create new Article.
+## 16. Setting up the new Article.
 
 - specification: https://realworld-docs.netlify.app/specifications/backend/endpoints/#create-article
 - The Process of working with new endpoint alltogether:
+
   - First task is to create a module, controller and service (_article_)
   - Created ArticleEntity by properly examining the structure given in the specs.
   - Now we will run our **migrations.**
@@ -155,4 +157,8 @@
   - Check the migration file. Push the migration > `pnpm db:migrate`
   - Check in the db > `psql -U postgres` > `\c mediumclone` > `\d article` -- Describe the table article.
 
-## 17. 
+## 17. Creating new Article.
+
+- Now, the DTO was created for the Article. It includes: `title, description, body, tagList?`
+- Use of dependency injection in the `article.serive.ts` file, to connect it with the module.
+- Added **AuthGaurd and ValidationPipe** in the `article.controller.ts` file before hiting the actual request.
