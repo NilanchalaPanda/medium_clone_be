@@ -78,4 +78,15 @@ export class ArticleController {
     const articles = await this.articleService.getAllArticles(userId, query);
     return articles;
   }
+
+  @Post(':slug/favorite')
+  @UseGuards(AuthGuard)
+  @UsePipes(ValidationPipe)
+  async favoriteArticle(
+    @User('id') userId: number,
+    @Param('slug') slug: string,
+  ): Promise<ArticleResponseInterface> {
+    const article = await this.articleService.favoriteArticle(userId, slug);
+    return this.articleService.buildArticleResponse(article);
+  }
 }

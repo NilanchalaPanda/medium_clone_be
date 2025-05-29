@@ -206,3 +206,18 @@
 ## 23. List the articles.
 
 - **Important:** Have to add some detials, not yet added.
+
+
+## 24. Favourite Articles.
+
+- The API spec is: https://realworld-docs.netlify.app/specifications/backend/endpoints/#favorite-article
+- The API endpoint is: **POST /api/articles/:slug/favorite**
+
+- To work along this endpoint, following steps are followed:
+  - Currently there is no option to associate the FAVORITES ARTICLES with the User entity.
+  - For the same, following changes are to done. ([Docs](https://orkhan.gitbook.io/typeorm/docs/many-to-many-relations)). 
+  - Here, using the @Many-to-Many decorator, the Article is linked with the Users.
+  - A new table named `users_favorites_article` is created after we migrations are completed.
+    - Convention is: `'First table' + 'key' + 'Second Table'`
+
+
