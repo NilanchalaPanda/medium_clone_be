@@ -1,8 +1,10 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { CreateArticleDtoTs } from '@app/article/dto/create-article.dto';
 import { Article } from '@app/article/article.entity';
 import { InjectRepository } from '@nestjs/typeorm';
-import { DeleteResult, Repository } from 'typeorm';
+import { DataSource, DeleteResult, Repository } from 'typeorm';
 import { Users } from '@app/user/user.entity';
 import { ArticleResponseInterface } from '@app/article/types/articleResponse.interface';
 import slugify from 'slugify';
@@ -13,6 +15,11 @@ export class ArticleService {
   constructor(
     @InjectRepository(Article)
     private articleRepository: Repository<Article>,
+
+    @InjectRepository(Users)
+    private userRepository: Repository<Users>,
+
+    private dataSource: DataSource,
   ) {}
 
   async createArticle(
@@ -24,8 +31,6 @@ export class ArticleService {
 
     // Adding the author of the article
     article.author = user;
-
-    // ! NEED SOME MODIFICATION HERE.
 
     // ~ Adding the slug for the article
     // article.slug = article.title.toLowerCase().trim().split(' ').join('-');
@@ -91,9 +96,47 @@ export class ArticleService {
     return this.articleRepository.save(article);
   }
 
-  async getAllArticles() {
-    const articles = await this.articleRepository.find({});
-    return articles;
+  // ~ Used Query builder for this endpoint.
+  async getAllArticles(userId: number, query: any) {
+    const queryBuilder = this.dataSource
+      .getRepository(Article)
+      .createQueryBuilder('article')
+      .leftJoinAndSelect('article.author', 'author');
+
+    const articles = await queryBuilder.getMany();
+    const articlesCount = await queryBuilder.getCount();
+
+    // If filters is applied as per authorName
+    if (query.author) {
+      const author = await this.userRepository.findOne({
+        where: { username: query.name },
+      });
+      queryBuilder.andWhere('article.authorId = :id', {
+        id: author?.id,
+      });
+    }
+
+    // If filter is applied as per TagList name
+    if (query.tag) {
+      // LIKE is used to search for a sub string. Because rememeber that ragList is a 'single-array', means comma-separated strings.
+      queryBuilder.andWhere('article.tagList LIKE :tag', {
+        tag: `%${query.tag}%`,
+      });
+    }
+
+    // If any limit is set.
+    if (query.limit) {
+      queryBuilder.limit(query.limit);
+    }
+
+    // If any pagination is needed.
+    if (query.skip) {
+      queryBuilder.skip(query.skip);
+    }
+
+    queryBuilder.orderBy('article.createdAt', 'DESC');
+
+    return { articles, articlesCount };
   }
 
   buildArticleResponse(article: Article): ArticleResponseInterface {

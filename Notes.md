@@ -184,14 +184,25 @@
 - `eager: true` fetches user data whenever article is being fetched.
 - All the logic is properly written in service and controller layer!
 
-
 ## 21. Updating single article with SLUG.
 
 - The API spec is: https://realworld-docs.netlify.app/specifications/backend/endpoints/#update-article
 - The endpoint is still dynamic > **DELETE /api/articles/:slug**
 
-
 ## 22. Getting all articles.
 
 - The API spec is: https://realworld-docs.netlify.app/specifications/backend/api-response-format/#multiple-articles
 - The response type is updated with a new interface called `multipleArticleResponseInterface` which is an object list of articles with key as articles and articlesCount.
+- Important checks to be added: **Query Builder will be used**
+  - Authentication is required to fetch articles.
+  - Only articles from users you follow will be included in the list.
+  - Ordering will be ordered ASCENDINGLY based on Timestamp of the article.
+
+#### NEW IMPORTANT TOPIC - [Query Builder](https://orkhan.gitbook.io/typeorm/docs/select-query-builder)
+
+- **Def:** QueryBuilder llows you to _build SQL queries_ using elegant and convenient syntax, execute them and get automatically transformed entities.
+
+
+## 23. List the articles.
+
+- **Important:** Have to add some detials, not yet added.

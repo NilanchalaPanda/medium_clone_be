@@ -71,8 +71,11 @@ export class ArticleController {
   }
 
   @Get()
-  async getAllArticles(): Promise<MultipleArticleResponseInterface> {
-    const articles = await this.articleService.getAllArticles();
-    return { articles, articlesCount: articles.length };
+  async getAllArticles(
+    @User('id') userId: number,
+    query: any,
+  ): Promise<MultipleArticleResponseInterface> {
+    const articles = await this.articleService.getAllArticles(userId, query);
+    return articles;
   }
 }
