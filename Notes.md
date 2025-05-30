@@ -221,3 +221,7 @@
     - Convention is: `'First table' + 'key' + 'Second Table'`
 
 
+## 25. Unfavorite Articles.
+
+- The API spec is: https://realworld-docs.netlify.app/specifications/backend/endpoints/#unfavorite-article
+- The endpoint spec is: DELETE /api/articles/:slug/favorite

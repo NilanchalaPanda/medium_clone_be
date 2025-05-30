@@ -168,6 +168,35 @@ export class ArticleService {
     return article;
   }
 
+  async unFavoriteArticle(userId: number, slug: string): Promise<Article> {
+    const article = await this.getArticleBySlug(slug);
+    const user = await this.userRepository.findOne({
+      where: { id: userId },
+      relations: ['favorites'],
+    });
+
+    if (!article) {
+      throw new HttpException('Article not found', HttpStatus.NOT_FOUND);
+    }
+
+    if (!user) {
+      throw new HttpException('User not found', HttpStatus.NOT_FOUND);
+    }
+
+    const articleIndex = user?.favorites.findIndex(
+      (favorite) => favorite.id !== article.id,
+    );
+
+    if (articleIndex) {
+      user?.favorites.splice(articleIndex, 1);
+      article.favoritesCount--;
+      await this.userRepository.save(user);
+      await this.articleRepository.save(article);
+    }
+
+    return article;
+  }
+
   buildArticleResponse(article: Article): ArticleResponseInterface {
     return { article };
   }
