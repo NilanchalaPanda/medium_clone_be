@@ -225,3 +225,13 @@
 
 - The API spec is: https://realworld-docs.netlify.app/specifications/backend/endpoints/#unfavorite-article
 - The endpoint spec is: DELETE /api/articles/:slug/favorite
+
+## 26. Incomplete part of List Articles.
+
+- The last `filter by favorites` part was not yet implemented in the previous part (Refer to **#23**)
+- **!!REMAINING**
+
+## 27. Seeding data.
+
+- Create seed data for entities like tags, users, modules, etc.
+- Some frameworks like Laravel have built-in support for seeding the data like this!

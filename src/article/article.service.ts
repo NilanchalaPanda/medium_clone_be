@@ -106,8 +106,10 @@ export class ArticleService {
     const articles = await queryBuilder.getMany();
     const articlesCount = await queryBuilder.getCount();
 
+    console.log('Query - ', query);
+
     // If filters is applied as per authorName
-    if (query.author) {
+    if (query && query.author) {
       const author = await this.userRepository.findOne({
         where: { username: query.name },
       });
@@ -117,20 +119,46 @@ export class ArticleService {
     }
 
     // If filter is applied as per TagList name
-    if (query.tag) {
+    if (query && query.tag) {
       // LIKE is used to search for a sub string. Because rememeber that ragList is a 'single-array', means comma-separated strings.
       queryBuilder.andWhere('article.tagList LIKE :tag', {
         tag: `%${query.tag}%`,
       });
     }
 
+    // If filter on basis of Favorites
+    if (query && query.favorited) {
+      const author = await this.userRepository.findOne({
+        where: { id: userId },
+        relations: ['favorites'],
+      });
+
+      if (!author) {
+        throw new HttpException('Author not found', HttpStatus.NOT_FOUND);
+      }
+
+      // First all the ids of favorite articles are fetched from that user.
+      const ids = author?.favorites.map((favorite) => favorite.id);
+
+      console.log('Author:', author);
+      console.log('Favorite Article IDs:', ids);
+
+      // If there are no favorite article ids, return empty result immediately
+      if (!ids || ids.length === 0) {
+        return { articles: [], articlesCount: 0 };
+      }
+
+      // Next it is checked if the article sent is present in the ids array or not.
+      queryBuilder.andWhere('article.id IN (:...ids)', { ids });
+    }
+
     // If any limit is set.
-    if (query.limit) {
+    if (query && query.limit) {
       queryBuilder.limit(query.limit);
     }
 
     // If any pagination is needed.
-    if (query.skip) {
+    if (query && query.skip) {
       queryBuilder.skip(query.skip);
     }
 
