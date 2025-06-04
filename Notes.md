@@ -235,3 +235,14 @@
 
 - Create seed data for entities like tags, users, modules, etc.
 - Some frameworks like Laravel have built-in support for seeding the data like this!
+
+## 28. Get Profile Endpoint
+
+- API Specification: https://realworld-docs.netlify.app/specifications/backend/endpoints/#get-profile
+- API Endpoint: GET /api/profiles/:username
+
+- Process:
+  - Create a profile module: `nest g mo profile`
+  - Create a profile controller: `nest g co profile`
+  - Create types and interfaces for the same, which is an extension of UserType.
+  - Create a profile service: `nest g s profile`

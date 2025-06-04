@@ -19,7 +19,7 @@ export class Users {
   username: string;
 
   @Column()
-  email: string;
+  email?: string;
 
   // The select option is set to false to prevent the password from being selected by default.
   @Column({ select: false })
