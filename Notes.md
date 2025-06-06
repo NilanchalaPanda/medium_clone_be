@@ -246,3 +246,13 @@
   - Create a profile controller: `nest g co profile`
   - Create types and interfaces for the same, which is an extension of UserType.
   - Create a profile service: `nest g s profile`
+
+## 29. Follow User Endpoint
+
+- API Specification: https://realworld-docs.netlify.app/specifications/backend/endpoints/#follow-user
+- API Endpoint: POST /api/profiles/:username/follow
+
+- Process:
+  - Creating a new entity for the same named as `follow.entity.ts`
+  - Pushed into migrations via `pnpm db:create src/migrations/CreateFollowTable`
+  
