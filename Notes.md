@@ -256,3 +256,7 @@
   - Creating a new entity for the same named as `follow.entity.ts`
   - Pushed into migrations via `pnpm db:create src/migrations/CreateFollowTable`
   
+## 30. Unfollow User Endpoint
+
+- Similar to the follow user endpoint. Just that, this will be a `Delete` endpoint for the same use-case.
+- Also updated the `getProfile` service with fetching of latest response for the follow.
