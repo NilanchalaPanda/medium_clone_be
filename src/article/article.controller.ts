@@ -101,4 +101,13 @@ export class ArticleController {
     const article = await this.articleService.unFavoriteArticle(userId, slug);
     return this.articleService.buildArticleResponse(article);
   }
+
+  @Get('feed')
+  @UseGuards(AuthGuard)
+  async getFeed(
+    @User('id') currentUserId: number,
+    @Query() query: any,
+  ): Promise<MultipleArticleResponseInterface> {
+    return await this.articleService.getFeed(currentUserId, query);
+  }
 }

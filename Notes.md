@@ -260,3 +260,9 @@
 
 - Similar to the follow user endpoint. Just that, this will be a `Delete` endpoint for the same use-case.
 - Also updated the `getProfile` service with fetching of latest response for the follow.
+
+## 31. Feed Articles Endpoint
+
+- Does require Authentication.
+- When user follows another writer, then his/her articles are shown in the feed.
+- There is offset and limit option as well.
